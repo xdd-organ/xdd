@@ -13,11 +13,11 @@
             <bean factory-method="build" factory-bean="customRegistry"/>
         </constructor-arg>
         <!-- 连接池最大连接数 -->
-        <property name="maxTotal" value="${maxTotal}"/>
+        <property name="maxTotal" value="${http.maxTotal:100}"/>
         <!-- 每个路由基础的连接 -->
-        <property name="defaultMaxPerRoute" value="${defaultMaxPerRoute}"/>
+        <property name="defaultMaxPerRoute" value="${http.defaultMaxPerRoute:50}"/>
         <!-- 可用空闲连接过期时间,重用空闲连接时会先检查是否空闲时间超过这个时间，如果超过，释放socket重新建立 -->
-        <property name="validateAfterInactivity" value="${validateAfterInactivity}"/>
+        <property name="validateAfterInactivity" value="${http.validateAfterInactivity:30000}"/>
     </bean>
 
     <!--处理请求重试-->
@@ -32,11 +32,11 @@
 
     <bean id="requestConfigBuilder" class="org.apache.http.client.config.RequestConfig.Builder">
         <!-- 连接超时毫秒 -->
-        <property name="connectTimeout" value="${connectTimeout}"/>
+        <property name="connectTimeout" value="${http.connectTimeout:4000}"/>
         <!-- 获取请求超时毫秒 -->
-        <property name="connectionRequestTimeout" value="${connectionRequestTimeout}"/>
+        <property name="connectionRequestTimeout" value="${http.connectionRequestTimeout:3000}"/>
         <!-- 传输超时毫秒 -->
-        <property name="socketTimeout" value="${socketTimeout}"/>
+        <property name="socketTimeout" value="${http.socketTimeout:10000}"/>
     </bean>
 
     <!-- 请求参数设置 -->
